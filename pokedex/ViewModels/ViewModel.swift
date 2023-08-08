@@ -12,7 +12,7 @@ import SwiftUI
 final class ViewModel: ObservableObject {
     private let pokemonManager = PokemonManagers()
     
-    
+
     @Published var pokemonList = [Pokemon]()
     @Published var pokemonDetails: DetailPokemon?
     @Published var searchText = ""
@@ -35,7 +35,7 @@ final class ViewModel: ObservableObject {
     func getDetails(pokemon: Pokemon){
         let id = getPokemonIndex(pokemon: pokemon)
         
-        self.pokemonDetails = DetailPokemon(id: 0, height: 0, weight: 0)
+        self.pokemonDetails = DetailPokemon(id: 0, height: 0, weight: 0, stats: [], types: [])
         
         pokemonManager.getDetailedPokemon(id: id){ data in
             
@@ -49,5 +49,19 @@ final class ViewModel: ObservableObject {
         let string = String(format: "%.2f", dValue / 10)
         
         return string
+    }
+    func statValue(for statName: String) -> Int {
+        if let stats = pokemonDetails?.stats,
+           let stat = stats.first(where: { $0.stat.name == statName }) {
+            return stat.base_stat
+        }
+        return 0
+    }
+    func getTypeNames() -> [String] {
+        guard let types = pokemonDetails?.types else {
+            return []
+        }
+        
+        return types.map { $0.type.name }
     }
 }

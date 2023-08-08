@@ -17,7 +17,7 @@ struct ContentView: View {
         
         NavigationView{
             ScrollView{
-                LazyVGrid(columns: adaptiveCollumns,spacing: 10){
+                LazyVGrid(columns: adaptiveCollumns,spacing: 2){
                     ForEach(vm.filterdPokemon){ pokemon in
                         NavigationLink(destination:PokemonDetailView(pokemon: pokemon)){
                             PokemonView(pokemon: pokemon)

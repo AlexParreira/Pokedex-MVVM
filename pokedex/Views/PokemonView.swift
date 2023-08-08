@@ -14,7 +14,7 @@ struct PokemonView: View {
     
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(vm.getPokemonIndex(pokemon: pokemon)).png")) {image in
+            AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\(vm.getPokemonIndex(pokemon: pokemon)).png")) {image in
                 if  image != nil {
                     image
                         .resizable()
@@ -27,11 +27,12 @@ struct PokemonView: View {
                     
                 }
                 .background(.thinMaterial)
-                .clipShape(Circle())
+                .clipShape(RoundedRectangle(cornerRadius: 50))
                 
             Text("\(pokemon.name.capitalized)")
                 .font(.system(size: 16, weight: .regular, design: .monospaced))
-                .padding(.bottom, 20)
+                .padding(.bottom, 5)
+            
             }
         }
     }
